@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using System.Threading.Tasks;
 
 namespace Http_Listener;
 
@@ -33,11 +32,20 @@ public class Program
                 Console.WriteLine($"{key} - {value}");
             }
 
+            response.ContentType = "application/json";
+
+            response.Headers.Add("Content-Type","text/html");
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+
+            var writer = new StreamWriter(response.OutputStream);
+
+            await writer.WriteAsync("<h1 style='color: blue'> Welcome Baku, Azerbaijan </h1>");
 
 
-
+            writer.Close();
+ 
         }
-
 
     }
 }
